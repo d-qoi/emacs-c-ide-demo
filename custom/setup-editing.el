@@ -1,4 +1,6 @@
 ;; GROUP: Editing -> Editing Basics
+
+;;; Code:
 (setq global-mark-ring-max 5000         ; increase mark ring to contains 5000 entries
       mark-ring-max 5000                ; increase kill ring to contains 5000 entries
       mode-require-final-newline t      ; add a newline to end of file
@@ -14,8 +16,8 @@
 (prefer-coding-system 'utf-8)
 
 (setq-default indent-tabs-mode nil)
-(delete-selection-mode)
-(global-set-key (kbd "RET") 'newline-and-indent)
+(delete-selection-mode) ; selected region will be delted with del or backspace
+;(global-set-key (kbd "RET") 'newline-and-indent) ; should not be here, shoul be  set in dtrt maybe
 
 ;; GROUP: Editing -> Killing
 (setq kill-ring-max 5000 ; increase kill-ring capacity
@@ -53,10 +55,11 @@
 ;; Package: yasnippet
 ;; GROUP: Editing -> Yasnippet
 ;; Package: yasnippet
-(use-package yasnippet
-  :defer t
-  :init
-  (add-hook 'prog-mode-hook 'yas-minor-mode))
+;; Still unsure about this one.
+;; (use-package yasnippet
+;;   :defer t
+;;   :init
+;;   (add-hook 'prog-mode-hook 'yas-minor-mode))
 
 ;; Package: clean-aindent-mode
 (use-package clean-aindent-mode
@@ -77,6 +80,7 @@
   (add-hook 'fundamental-mode 'ws-butler-mode))
 
 ;; PACKAGE: comment-dwim-2
+;; The thing that allows commenting regions, and cycling through comments
 (use-package comment-dwim-2
   :bind (("M-;" . comment-dwim-2))
   )
@@ -85,7 +89,7 @@
 ;; GROUP: Editing -> Matching -> Isearch -> Anzu
 (use-package anzu
   :init
-  (global-anzu-mode)
+  (global-anzu-mode +1)
   (global-set-key (kbd "M-%") 'anzu-query-replace)
   (global-set-key (kbd "C-M-%") 'anzu-query-replace-regexp))
 
@@ -93,7 +97,9 @@
 (use-package iedit
   :bind (("C-;" . iedit-mode))
   :init
-  (setq iedit-toggle-key-default nil))
+  (setq iedit-toggle-key-default nil)
+  (setq iedit-case-sensitive 1))
+
 
 ;; Customized functions
 (defun prelude-move-beginning-of-line (arg)
@@ -254,5 +260,7 @@ Position the cursor at it's beginning, according to the current mode."
 
 (global-set-key (kbd "M-o") 'prelude-smart-open-line)
 (global-set-key (kbd "M-o") 'open-line)
+
+(global-set-key (kbd "M-w") 'copy-region-as-kill)
 
 (provide 'setup-editing)

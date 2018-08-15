@@ -4,6 +4,7 @@
 (global-semanticdb-minor-mode 1)
 (global-semantic-idle-scheduler-mode 1)
 (global-semantic-stickyfunc-mode 1)
+(global-semantic-idle-local-symbol-highlight-mode 1)
 
 (semantic-mode 1)
 
@@ -16,7 +17,18 @@
 (add-hook 'c++-mode-hook 'alexott/cedet-hook)
 
 ;; Enable EDE only in C/C++
-(require 'ede)
-(global-ede-mode)
+(use-package ede
+  :init
+  (progn
+    ;; (global-ede-mode t)
+    (add-hook 'c-mode-common-hook ede-minor-mode)
+    (add-hook 'c-mode-hook ede-minor-mode)
+    (add-hook 'c++-mode-hook ede-minor-mode)))
+
+
+(use-package ecb
+  :init
+  (progn
+    ))
 
 (provide 'setup-cedet)

@@ -1,3 +1,4 @@
+;;; Code:
 (use-package helm
   :init
   (progn
@@ -77,7 +78,6 @@
     (global-set-key (kbd "C-c r") 'helm-recentf)
     (global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
     (global-set-key (kbd "C-c h o") 'helm-occur)
-    (global-set-key (kbd "C-c h o") 'helm-occur)
 
     (global-set-key (kbd "C-c h w") 'helm-wikipedia-suggest)
     (global-set-key (kbd "C-c h g") 'helm-google-suggest)
@@ -137,6 +137,12 @@
       :init
       (helm-projectile-on)
       (setq projectile-completion-system 'helm)
-      (setq projectile-indexing-method 'alien))))
+      (setq projectile-indexing-method 'alien)
+      (setq projectile-switch-project-action 'helm-projectile))
+    (use-package helm-ag
+      :init
+      (global-set-key (kbd "C-c a g") 'helm-do-ag)
+      (setq helm-ag-use-grep-ignore-list t))))
 
 (provide 'setup-helm)
+;;; setup-helm.el ends here

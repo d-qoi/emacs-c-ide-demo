@@ -1,0 +1,9 @@
+*~
+ecb/
+ede-projects.el
+elpa/*
+eshell/*
+init.el.before_ecb_2.50
+projectile-bookmarks.eld
+recentf
+
