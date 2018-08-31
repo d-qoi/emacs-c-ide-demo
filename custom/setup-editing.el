@@ -69,7 +69,8 @@
 ;; Package: dtrt-indent
 (use-package dtrt-indent
   :init
-  (dtrt-indent-mode 1)
+  ;; (dtrt-indent-mode 1)
+  (add-hook 'c-mode-hook 'dtrt-indent-mode)
   (setq dtrt-indent-verbosity 0))
 
 ;; Package: ws-butler
@@ -99,6 +100,30 @@
   :init
   (setq iedit-toggle-key-default nil)
   (setq iedit-case-sensitive 1))
+
+
+;;; This is the section that is going to be setting up flycheck
+;;; Code:
+(use-package flycheck
+  :ensure t
+  :init
+  (progn
+    (global-flycheck-mode)
+    (setq-local flycheck-python-pylint-executable "python2")
+    (setq flycheck-checker-error-threshold 10000)
+    (setq flycheck-cppcheck-checks "all")
+    (add-to-list 'flycheck-cppcheck-include-path "~/sw/dev/gpu_drv/chips_a")))
+
+(use-package hi-lock
+  :init
+  (progn
+    (define-key hi-lock-map (kbd "M-s h w") 'hi-lock-write-interactive-patterns)
+    (define-key hi-lock-map (kbd "M-s h u") 'unhighlight-regexp)
+    (define-key hi-lock-map (kbd "M-s h r") 'highlight-regexp)
+    (define-key hi-lock-map (kbd "M-s h p") 'highlight-phrase)
+    (define-key hi-lock-map (kbd "M-s h l") 'highlight-lines-matching-regexp)
+    (define-key hi-lock-map (kbd "M-s h f") 'hi-lock-find-patterns)
+    (global-set-key (kbd "M-s h h") 'hi-lock-mode)))
 
 
 ;; Customized functions

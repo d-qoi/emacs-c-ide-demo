@@ -2,16 +2,6 @@
 
 ;;; Commentary:
 
-;;; This is the section that is going to be setting up flycheck
-;;; Code:
-(use-package flycheck
-  :ensure t
-  :init
-  (progn
-    (global-flycheck-mode)
-    (setq-local flycheck-python-pylint-executable "python2")
-    (setq flycheck-checker-error-threshold 10000)))
-
 ;;; This section sets up elpy
 ;;; Code:
 (use-package elpy
