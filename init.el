@@ -29,6 +29,7 @@
 (require 'setup-elpy)
 (require 'setup-winstack)
 (require 'setup-python)
+(provide 'setup-magit)
 
 ;; Linum mode
 (global-linum-mode t)

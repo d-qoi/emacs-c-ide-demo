@@ -4,6 +4,9 @@
 
 ;;; This section sets up elpy
 ;;; Code:
+
+(require 'pyvenv)
+
 (use-package elpy
   :init
   (progn
@@ -15,6 +18,14 @@
     (setq elpy-rpc-python-command "/usr/bin/python2")
     (define-key python-mode-map (kbd "M-.") 'elpy-goto-definition)))
           ;; python-shell-interpreter-args "-i --simple-prompt")))
+
+
+(defun cust/set-elpy-py3 ()
+  (interactive)
+  (elpy-disable)
+  (setq python-shell-interpreter "python3")
+  (setq elpy-rpc-python-command "python3")
+  (elpy-enable))
 
 (provide 'setup-elpy)
 ;;; setup-elpy ends here
