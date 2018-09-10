@@ -117,6 +117,7 @@
 (use-package hi-lock
   :init
   (progn
+    (global-hi-lock-mode)
     (define-key hi-lock-map (kbd "M-s h w") 'hi-lock-write-interactive-patterns)
     (define-key hi-lock-map (kbd "M-s h u") 'unhighlight-regexp)
     (define-key hi-lock-map (kbd "M-s h r") 'highlight-regexp)
