@@ -1,3 +1,6 @@
+;;; package -- init file for emacs
+
+;;; Code:
 (require 'package)
 (add-to-list 'package-archives
          '("melpa" . "http://melpa.org/packages/") t)
@@ -17,6 +20,9 @@
 
 (add-to-list 'load-path "~/.emacs.d/custom")
 (add-to-list 'load-path "~/.emacs.d/ecb")
+(add-to-list 'load-path "~/.emacs.d/xelb")
+(add-to-list 'load-path "~/.emacs.d/exwm")
+(add-to-list 'load-path "~/.emacs.d/helm-exwm")
 
 (require 'setup-general)
 (if (version< emacs-version "24.4")
@@ -29,7 +35,7 @@
 (require 'setup-elpy)
 (require 'setup-winstack)
 (require 'setup-python)
-(provide 'setup-magit)
+(require 'setup-magit)
 
 ;; Linum mode
 (global-linum-mode t)
@@ -46,6 +52,10 @@
 
 ;; for auto reloading
 (setq global-auto-revert-mode 1)
+
+;; displaying time
+(setq display-time-default-load-average nil)
+(display-time-mode 1)
 
 ;; function-args
 ;; (require 'function-args)
@@ -72,10 +82,12 @@
     (".tox" "build" "dist" ".cask" ".ipynb_checkpoints" "_out")))
  '(package-selected-packages
    (quote
-    (magit zygospore helm-gtags helm yasnippet ws-butler volatile-highlights use-package undo-tree iedit dtrt-indent counsel-projectile company clean-aindent-mode anzu))))
+    (markdown-mode exwm-edit desktop-environment gpastel helm-exwm magit zygospore helm-gtags helm yasnippet ws-butler volatile-highlights use-package undo-tree iedit dtrt-indent counsel-projectile company clean-aindent-mode anzu))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;;; init.el ends here

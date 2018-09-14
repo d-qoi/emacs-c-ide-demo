@@ -6,4 +6,10 @@ eshell/*
 init.el.before_ecb_2.50
 projectile-bookmarks.eld
 recentf
+auto-save-list
+exwm
+helm-exwm
+semanticdb
+xelb
+tramp
 *#
