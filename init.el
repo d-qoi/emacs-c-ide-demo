@@ -37,12 +37,6 @@
 (require 'setup-python)
 (require 'setup-magit)
 
-;; Linum mode
-(global-linum-mode t)
-(show-paren-mode 1)
-(setq column-number-mode t)
-(setq linum-format "%d|")
-
 ;; Other custom things
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 

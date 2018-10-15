@@ -6,6 +6,9 @@
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 
+(show-paren-mode 1)
+(setq column-number-mode t)
+
 (setq gc-cons-threshold 100000000)
 (setq inhibit-startup-message t)
 
@@ -73,10 +76,31 @@
 
 (use-package json-mode)
 
+;; Linum mode
+(global-linum-mode t)
+(setq linum-format "%d|")
+
+;;; linum disable hook
+(defvar linum-disabled-modes
+  '(term-mode help-mode exwm-mode))
+
+(defun linum-disable-function ()
+  "Function for the hook for after major mode change."
+  (defun recloop (val lst)
+    ;;(message "recloop %s %s" val (car lst))
+    (cond
+     ((equal '() lst) 1)
+     ((equal val (car lst)) 0)
+     (t (recloop val (cdr lst)))))
+  (linum-mode (recloop major-mode linum-disabled-modes)))
+
+(add-hook 'after-change-major-mode-hook 'linum-disable-function)
+
+
 (defun revert-all-file-buffer ()
   "Refresh all open files buffers without confirmation.
-Buffers in modified (not yet saved) state in emacs will not be reverted. They
-will be reverted though if they were modified outside emacs.
+Buffers in modified (not yet saved) state in Emacs will not be reverted.  They
+will be reverted though if they were modified outside Emacs.
 Buffers visiting files which do not exist any more or are no longer readable
 will be killed."
   (interactive)
