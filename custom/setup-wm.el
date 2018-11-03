@@ -103,6 +103,13 @@
               (lambda ()
                 (start-process-shell-command
                  "xrandr" nil "xrandr --output VGA1 --left-of LVDS1 --auto")))
+
+    (add-hook 'exwm-manage-finish-hook
+              (lambda ()
+                (when (and exwm-class-name
+                           (string= exwm-class-name "XTerm"))
+                  (exwm-input-set-local-simulation-keys '(([?\C-c ?\C-c] . ?\C-c))))))
+
     (exwm-randr-enable)))
 
 (provide 'setup-wm)
