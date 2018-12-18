@@ -34,5 +34,6 @@
     (setq winstack-stack '())
     (message "Stack Cleared")))
 
+(message "setup-winstack loaded")
 (provide 'setup-winstack)
 ;;; setup-winstack.el ends here

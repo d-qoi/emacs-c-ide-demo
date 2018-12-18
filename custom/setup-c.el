@@ -1,6 +1,8 @@
 ;; company-c-headers
 
 ;;; Code:
+(message "setup-c entered")
+
 (use-package company-c-headers
   :init
   (add-to-list 'company-backends 'company-c-headers))
@@ -21,6 +23,29 @@
 ;; “user”: When you want to define your own style
 (setq c-default-style "linux") ;; set style to "linux"
 
-(use-package cc-mode)
+(require 'cc-mode)
 
+(defun c-offset-correct-hook ()
+  (c-set-offset 'substatement-open '0))
+
+(add-hook 'c-mode-hook 'c-offset-correct-hook)
+
+(use-package cuda-mode)
+
+(use-package xcscope
+  :custom
+  (cscope-initial-directory "~/cscopedb/")
+  (cscope-keymap-prefix "C-c M-s")
+  :config
+  (cscope-setup) ;; has bindings for c, c++, and dired
+  ;; (define-key cscope-minor-mode-keymap cscope-keymap-prefix nil)
+  ;; (setq cscope-keymap-prefix (kbd "C-c S"))
+  ;; (define-key cscope-minor-mode-keymap cscope-keymap-prefix
+  ;;   cscope-command-map)
+  (add-hook 'c-mode-common-hook (lambda () (cscope-minor-mode 1))))
+
+    ;;(add-hook 'c-mode-hook cscope-minor-mode)))
+
+(message "setup-c loaded")
 (provide 'setup-c)
+;;; setup-c.el ends here

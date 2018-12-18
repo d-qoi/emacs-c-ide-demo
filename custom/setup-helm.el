@@ -131,19 +131,19 @@
       ;; If nil, you can slightly boost invoke speed in exchange for text color
       (setq helm-swoop-speed-or-color t))
 
+    (helm-mode 1)
+
     (use-package helm-projectile
       :init
       (helm-projectile-on)
       (setq projectile-completion-system 'helm)
       (setq projectile-indexing-method 'alien)
       (setq projectile-switch-project-action 'helm-projectile))
-
     (use-package helm-ag
       :init
       (global-set-key (kbd "C-c a g") 'helm-do-ag)
-      (setq helm-ag-use-grep-ignore-list t))
+      (setq helm-ag-use-grep-ignore-list t))))
 
-    (helm-mode 1)))
-
+(message "setup-helm loaded")
 (provide 'setup-helm)
 ;;; setup-helm.el ends here
