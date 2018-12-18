@@ -27,5 +27,10 @@
 
 (use-package json-mode)
 
+
+(use-package magit
+  :init
+  (global-set-key (kbd "C-x g") 'magit-status))
+
 (message "setup-other-packages loaded")
 (provide 'setup-other-packages)

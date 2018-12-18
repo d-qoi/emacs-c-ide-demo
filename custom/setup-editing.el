@@ -68,10 +68,11 @@
 
 ;; Package: dtrt-indent
 (use-package dtrt-indent
+  :custom
+  (dtrt-indent-verbosity0)
   :init
   ;; (dtrt-indent-mode 1)
-  (add-hook 'c-mode-hook 'dtrt-indent-mode)
-  (setq dtrt-indent-verbosity 0))
+  (add-hook 'c-mode-hook 'dtrt-indent-mode))
 
 ;; Package: ws-butler
 (use-package ws-butler
@@ -83,8 +84,7 @@
 ;; PACKAGE: comment-dwim-2
 ;; The thing that allows commenting regions, and cycling through comments
 (use-package comment-dwim-2
-  :bind (("M-;" . comment-dwim-2))
-  )
+  :bind (("M-;" . comment-dwim-2)))
 
 ;; PACKAGE: anzu
 ;; GROUP: Editing -> Matching -> Isearch -> Anzu
@@ -97,12 +97,9 @@
 ;; PACKAGE: iedit
 (use-package iedit
   :bind (("C-;" . iedit-mode))
-  :init
-  (setq iedit-toggle-key-default nil)
-  (setq iedit-case-sensitive 1))
-
-(use-package ecb)
-
+  :custom
+  (iedit-toggle-key-default nil)
+  (iedit-case-sensitive 1))
 
 ;;; This is the section that is going to be setting up flycheck
 ;;; Code:
@@ -292,7 +289,7 @@ Position the cursor at it's beginning, according to the current mode."
   (indent-according-to-mode))
 
 (global-set-key (kbd "M-o") 'prelude-smart-open-line)
-(global-set-key (kbd "M-o") 'open-line)
+;;(global-set-key (kbd "M-o") 'open-line)
 
 (global-set-key (kbd "M-w") 'copy-region-as-kill)
 

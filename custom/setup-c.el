@@ -46,6 +46,15 @@
 
     ;;(add-hook 'c-mode-hook cscope-minor-mode)))
 
+;; function-args
+(use-package function-args
+  :config
+  (fa-config-default)
+  (define-key c-mode-map  [(tab)] 'company-complete)
+  (define-key c++-mode-map  [(tab)] 'company-complete))
+
+(use-package ecb)
+
 (message "setup-c loaded")
 (provide 'setup-c)
 ;;; setup-c.el ends here

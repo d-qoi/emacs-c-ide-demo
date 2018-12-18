@@ -1,3 +1,4 @@
+
 (require 'package)
 (add-to-list 'package-archives
          '("melpa" . "http://melpa.org/packages/") t)
@@ -16,7 +17,18 @@
 (setq use-package-always-ensure t)
 
 (add-to-list 'load-path "~/.emacs.d/custom")
-(add-to-list 'load-path "~/.emacs.d/ecb")
+(if (file-directory-p "~/.emacs.d/ecb/")
+    (progn
+      (message "ECB found")
+      (add-to-list 'load-path "~/.emacs.d/ecb")))
+(if (file-directory-p "~/.emacs.d/xelb")
+    (progn
+      (message "XELB found")
+      (add-to-list 'load-path "~/.emacs.d/xelb")))
+(if (file-directory-p "~/.emacs.d/exwm")
+    (progn
+      (message "EXWM found")
+      (add-to-list 'load-path "~/.emacs.d/exwm")))
 
 (require 'setup-general)
 (require 'custom-functions)
@@ -28,13 +40,6 @@
 (require 'setup-editing)
 (require 'setup-elpy)
 (require 'setup-winstack)
-
-
-;; function-args
-;; (require 'function-args)
-;; (fa-config-default)
-;; (define-key c-mode-map  [(tab)] 'company-complete)
-;; (define-key c++-mode-map  [(tab)] 'company-complete)
 
 (add-hook 'after-init-hook (lambda () (message "after-init-hook called")))
 
