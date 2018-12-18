@@ -1,10 +1,12 @@
 ;; this variables must be set before load helm-gtags
 ;; you can change to any prefix key of your choice
-(setq helm-gtags-prefix-key "\C-cg")
 
+;;; Code:
+(require 'cc-mode)
 (use-package helm-gtags
   :init
   (progn
+    ;;(setq helm-gtags-prefix-key "\C-cg")
     (setq helm-gtags-ignore-case t
           helm-gtags-auto-update t
           helm-gtags-use-input-at-cursor t
@@ -20,10 +22,11 @@
     (add-hook 'eshell-mode-hook 'helm-gtags-mode)
 
     ;; Enable helm-gtags-mode in languages that GNU Global supports
-    (add-hook 'c-mode-hook 'helm-gtags-mode)
-    (add-hook 'c++-mode-hook 'helm-gtags-mode)
-    (add-hook 'java-mode-hook 'helm-gtags-mode)
-    (add-hook 'asm-mode-hook 'helm-gtags-mode)
+    (add-hook 'c-mode-common-hook 'helm-gtags-mode)
+    ;(add-hook 'c-mode-hook 'helm-gtags-mode)
+    ;(add-hook 'c++-mode-hook 'helm-gtags-mode)
+    ;(add-hook 'java-mode-hook 'helm-gtags-mode)
+    ;(add-hook 'asm-mode-hook 'helm-gtags-mode)
 
     ;; key bindings
     (with-eval-after-load 'helm-gtags
@@ -34,4 +37,5 @@
       (define-key helm-gtags-mode-map (kbd "C-c <") 'helm-gtags-previous-history)
       (define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history))))
 
+(message "setup-helm-gtags loaded")
 (provide 'setup-helm-gtags)

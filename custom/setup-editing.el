@@ -101,30 +101,37 @@
   (setq iedit-toggle-key-default nil)
   (setq iedit-case-sensitive 1))
 
+(use-package ecb)
+
 
 ;;; This is the section that is going to be setting up flycheck
 ;;; Code:
 (use-package flycheck
   :ensure t
+  :custom
+  (flycheck-python-pylint-executable "python2")
+  (flycheck-cppcheck-checks "all")
+  (flycheck-check-syntax-automatically '(save idle-change mode-enabled))
+  (flycheck-checker-error-threshold 10000)
   :init
-  (progn
-    (global-flycheck-mode)
-    (setq-local flycheck-python-pylint-executable "python2")
-    (setq flycheck-checker-error-threshold 10000)
-    (setq flycheck-cppcheck-checks "all")
-    (add-to-list 'flycheck-cppcheck-include-path "~/sw/dev/gpu_drv/chips_a")))
+  (global-flycheck-mode)
+  (add-to-list 'flycheck-cppcheck-include-path "~/sw/dev/gpu_drv/chips_a")
+  (add-hook 'c-mode-hook
+            (lambda ()
+              (setq flycheck-checker 'c/c++-cppcheck)))
+  (add-hook 'c++-mode-hook
+            (lambda ()
+              (setq flycheck-checker 'c/c++-cppcheck))))
 
 (use-package hi-lock
+  :bind (("M-s h w" . hi-lock-write-interactive-patterns)
+         ("M-s h u" . unhighlight-regexp)
+         ("M-s h r" . highlight-regexp)
+         ("M-s h p" . highlight-phrase)
+         ("M-s h l" . highlight-lines-matching-regexp)
+         ("M-s h f" . hi-lock-find-patterns))
   :init
-  (progn
-    (global-hi-lock-mode)
-    (define-key hi-lock-map (kbd "M-s h w") 'hi-lock-write-interactive-patterns)
-    (define-key hi-lock-map (kbd "M-s h u") 'unhighlight-regexp)
-    (define-key hi-lock-map (kbd "M-s h r") 'highlight-regexp)
-    (define-key hi-lock-map (kbd "M-s h p") 'highlight-phrase)
-    (define-key hi-lock-map (kbd "M-s h l") 'highlight-lines-matching-regexp)
-    (define-key hi-lock-map (kbd "M-s h f") 'hi-lock-find-patterns)
-    (global-set-key (kbd "M-s h h") 'hi-lock-mode)))
+  (global-set-key (kbd "M-s h h") 'hi-lock-mode))
 
 
 ;; Customized functions
@@ -289,4 +296,5 @@ Position the cursor at it's beginning, according to the current mode."
 
 (global-set-key (kbd "M-w") 'copy-region-as-kill)
 
+(message "setup-editing loaded")
 (provide 'setup-editing)

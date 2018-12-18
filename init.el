@@ -1,6 +1,3 @@
-;;; package -- init file for emacs
-
-;;; Code:
 (require 'package)
 (add-to-list 'package-archives
          '("melpa" . "http://melpa.org/packages/") t)
@@ -20,42 +17,26 @@
 
 (add-to-list 'load-path "~/.emacs.d/custom")
 (add-to-list 'load-path "~/.emacs.d/ecb")
-(add-to-list 'load-path "~/.emacs.d/xelb")
-(add-to-list 'load-path "~/.emacs.d/exwm")
-(add-to-list 'load-path "~/.emacs.d/helm-exwm")
 
 (require 'setup-general)
-(if (version< emacs-version "24.4")
-    (require 'setup-ivy-counsel)
-  (require 'setup-helm)
-  (require 'setup-helm-gtags))
-;; (require 'setup-ggtags)
+(require 'custom-functions)
+(require 'setup-other-packages)
+(require 'setup-helm)
+(require 'setup-helm-gtags)
+(require 'setup-c)
 (require 'setup-cedet)
 (require 'setup-editing)
 (require 'setup-elpy)
 (require 'setup-winstack)
-(require 'setup-python)
-(require 'setup-magit)
 
-;; Other custom things
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
-
-(recentf-mode 1)
-(setq recentf-max-menu-items 25)
-(global-set-key "\C-x\ \C-r" 'recentf-open-files)
-
-;; for auto reloading
-(setq global-auto-revert-mode 1)
-
-;; displaying time
-(setq display-time-default-load-average nil)
-(display-time-mode 1)
 
 ;; function-args
 ;; (require 'function-args)
 ;; (fa-config-default)
 ;; (define-key c-mode-map  [(tab)] 'company-complete)
 ;; (define-key c++-mode-map  [(tab)] 'company-complete)
+
+(add-hook 'after-init-hook (lambda () (message "after-init-hook called")))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -76,7 +57,7 @@
     (".tox" "build" "dist" ".cask" ".ipynb_checkpoints" "_out")))
  '(package-selected-packages
    (quote
-    (restclient markdown-mode exwm-edit desktop-environment gpastel helm-exwm magit zygospore helm-gtags helm yasnippet ws-butler volatile-highlights use-package undo-tree iedit dtrt-indent counsel-projectile company clean-aindent-mode anzu))))
+    (zygospore helm-gtags helm yasnippet ws-butler volatile-highlights use-package undo-tree iedit dtrt-indent counsel-projectile company clean-aindent-mode anzu))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -84,4 +65,6 @@
  ;; If there is more than one, they won't work right.
  )
 
+
 ;;; init.el ends here
+(put 'narrow-to-region 'disabled nil)
