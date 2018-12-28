@@ -27,6 +27,9 @@
 ;; set appearance of a tab that is represented by 4 spaces
 (setq-default tab-width 4)
 
+;; truncating liens
+(setq-default truncate-lines t)
+
 ;; Linum mode
 (require 'linum)
 (global-linum-mode t)
@@ -72,15 +75,23 @@
 ;; activate whitespace-mode to view all whitespace characters
 (global-set-key (kbd "C-c w") 'whitespace-mode)
 
-(windmove-default-keybindings)
-
-(setq-default truncate-lines t)
+(when (fboundp 'windmove-default-keybindings)
+  (windmove-default-keybindings))
 
 (require 'grep)
 (eval-after-load 'grep
   '(progn
      (add-to-list 'grep-find-ignored-directories "_out")))
 
+;; always helpful
+(display-time)
+
+;; laptop handling
+(require 'battery)
+(when (and battery-status-function
+           (not (string-match-p "N/A"
+                                (battery-format "%B" (funcall battery-status-function)))))
+  (display-battery-mode 1))
 
 ;; binding functions
 (global-set-key (kbd "C-x C-k") 'delete-other-windows)
