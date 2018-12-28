@@ -3,6 +3,7 @@ ecb/
 ede-projects.el
 elpa/*
 eshell/*
+games/
 init.el.before_ecb_2.50
 projectile-bookmarks.eld
 recentf
