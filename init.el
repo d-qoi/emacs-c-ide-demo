@@ -74,10 +74,10 @@
  '(helm-gtags-suggested-key-mapping t)
  '(helm-gtags-use-input-at-cursor t)
  '(iedit-case-sensitive 1 t)
- '(iedit-toggle-key-default nil t)
+ '(iedit-toggle-key-default nil)
  '(package-selected-packages
    (quote
-    (helm-exwm exwm-randr zygospore helm-gtags helm yasnippet ws-butler volatile-highlights use-package undo-tree iedit dtrt-indent counsel-projectile company clean-aindent-mode anzu))))
+    (realgud helm-exwm exwm-randr zygospore helm-gtags helm yasnippet ws-butler volatile-highlights use-package undo-tree iedit dtrt-indent counsel-projectile company clean-aindent-mode anzu))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -88,3 +88,4 @@
 
 ;;; init.el ends here
 (put 'narrow-to-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
