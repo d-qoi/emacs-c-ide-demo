@@ -25,12 +25,18 @@
 (use-package zygospore
   :bind (("C-x 1" . zygospore-toggle-delete-other-windows)))
 
+;; not needed but helpful sometimes
 (use-package json-mode)
 
+;; Popup known keybindings for incomplete key sequences.
+; alts are onekey and another thing
+(use-package which-key
+  :config
+  (which-key-mode 1))
 
-(use-package magit
-  :init
-  (global-set-key (kbd "C-x g") 'magit-status))
+(use-package annotate
+  )
 
 (message "setup-other-packages loaded")
 (provide 'setup-other-packages)
+;;; setup-other-packages.el ends here

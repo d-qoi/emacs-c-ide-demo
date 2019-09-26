@@ -4,15 +4,15 @@
 ;;; Code:
 (require 'cc-mode)
 (use-package helm-gtags
-  :custom
-  (helm-gtags-ignore-case t)
-  (helm-gtags-auto-update t)
-  (helm-gtags-use-input-at-cursor t)
-  (helm-gtags-pulse-at-cursor t)
-  (helm-gtags-prefix-key "\C-cg")
-  (helm-gtags-suggested-key-mapping t)
   :init
   (progn
+    ;;(setq helm-gtags-prefix-key "\C-cg")
+    (setq helm-gtags-ignore-case t
+          helm-gtags-auto-update t
+          helm-gtags-use-input-at-cursor t
+          helm-gtags-pulse-at-cursor t
+          helm-gtags-prefix-key "\C-cg"
+          helm-gtags-suggested-key-mapping t)
 
     ;; Enable helm-gtags-mode in Dired so you can jump to any tag
     ;; when navigate project tree with Dired
@@ -22,11 +22,11 @@
     (add-hook 'eshell-mode-hook 'helm-gtags-mode)
 
     ;; Enable helm-gtags-mode in languages that GNU Global supports
-    ;;(add-hook 'c-mode-common-hook 'helm-gtags-mode)
-    (add-hook 'c-mode-hook 'helm-gtags-mode)
-    (add-hook 'c++-mode-hook 'helm-gtags-mode)
-    (add-hook 'java-mode-hook 'helm-gtags-mode)
-    (add-hook 'asm-mode-hook 'helm-gtags-mode)
+    (add-hook 'c-mode-common-hook 'helm-gtags-mode)
+    ;(add-hook 'c-mode-hook 'helm-gtags-mode)
+    ;(add-hook 'c++-mode-hook 'helm-gtags-mode)
+    ;(add-hook 'java-mode-hook 'helm-gtags-mode)
+    ;(add-hook 'asm-mode-hook 'helm-gtags-mode)
 
     ;; key bindings
     (with-eval-after-load 'helm-gtags
@@ -35,7 +35,8 @@
       (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
       (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)
       (define-key helm-gtags-mode-map (kbd "C-c <") 'helm-gtags-previous-history)
-      (define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history))))
+      (define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history)
+      (define-key helm-gtags-mode-map (kbd "C-c g u") 'helm-gtags-update-tags))))
 
 (message "setup-helm-gtags loaded")
 (provide 'setup-helm-gtags)

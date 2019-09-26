@@ -131,6 +131,8 @@
       ;; If nil, you can slightly boost invoke speed in exchange for text color
       (setq helm-swoop-speed-or-color t))
 
+    (helm-mode 1)
+
     (use-package helm-projectile
       :init
       (helm-projectile-on)
@@ -140,8 +142,7 @@
     (use-package helm-ag
       :init
       (global-set-key (kbd "C-c a g") 'helm-do-ag)
-      (setq helm-ag-use-grep-ignore-list t))
-    (helm-mode 1)))
+      (setq helm-ag-use-grep-ignore-list t))))
 
 (message "setup-helm loaded")
 (provide 'setup-helm)

@@ -17,6 +17,7 @@
     (define-key python-mode-map (kbd "M-,") 'pop-global-mark)))
           ;; python-shell-interpreter-args "-i --simple-prompt")))
 
+
 (use-package company-jedi
   :init
   (progn

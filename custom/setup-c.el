@@ -35,25 +35,16 @@
 (use-package xcscope
   :custom
   (cscope-initial-directory "~/cscopedb/")
-  (cscope-keymap-prefix "C-c M-s")
+  ;;(cscope-keymap-prefix "C-cM-s")
   :config
   (cscope-setup) ;; has bindings for c, c++, and dired
-  ;; (define-key cscope-minor-mode-keymap cscope-keymap-prefix nil)
-  ;; (setq cscope-keymap-prefix (kbd "C-c S"))
-  ;; (define-key cscope-minor-mode-keymap cscope-keymap-prefix
-  ;;   cscope-command-map)
+  (define-key cscope-minor-mode-keymap cscope-keymap-prefix nil)
+  (setq cscope-keymap-prefix (kbd "C-c S"))
+  (define-key cscope-minor-mode-keymap cscope-keymap-prefix
+    cscope-command-map)
   (add-hook 'c-mode-common-hook (lambda () (cscope-minor-mode 1))))
 
     ;;(add-hook 'c-mode-hook cscope-minor-mode)))
-
-;; function-args
-(use-package function-args
-  :config
-  (fa-config-default)
-  (define-key c-mode-map  [(tab)] 'company-complete)
-  (define-key c++-mode-map  [(tab)] 'company-complete))
-
-(use-package ecb)
 
 (message "setup-c loaded")
 (provide 'setup-c)

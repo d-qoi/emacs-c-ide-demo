@@ -35,15 +35,5 @@ will be killed."
           (kill-buffer buf)
           (message "Killed %s" filename))))))
 
-
-(require 'elpy)
-(defun set-elpy-py3 ()
-  (interactive)
-  (elpy-disable)
-  (setq python-shell-interpreter "python3")
-  (setq elpy-rpc-python-command "python3")
-  (elpy-enable))
-
-
 (message "custom-functions loaded")
 (provide 'custom-functions)

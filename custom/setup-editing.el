@@ -1,4 +1,4 @@
-;; GROUP: Editing -> Editing Basics
+1;; GROUP: Editing -> Editing Basics
 
 ;;; Code:
 (setq global-mark-ring-max 5000         ; increase mark ring to contains 5000 entries
@@ -15,7 +15,8 @@
 (set-language-environment "UTF-8")
 (prefer-coding-system 'utf-8)
 
-(setq-default indent-tabs-mode nil)
+;; set in general
+; (setq-default indent-tabs-mode nil)
 (delete-selection-mode) ; selected region will be delted with del or backspace
 ;(global-set-key (kbd "RET") 'newline-and-indent) ; should not be here, shoul be  set in dtrt maybe
 
@@ -25,19 +26,20 @@
       )
 
 ;; show whitespace in diff-mode
-(add-hook 'diff-mode-hook (lambda ()
-                            (setq-local whitespace-style
-                                        '(face
-                                          tabs
-                                          tab-mark
-                                          spaces
-                                          space-mark
-                                          trailing
-                                          indentation::space
-                                          indentation::tab
-                                          newline
-                                          newline-mark))
-                            (whitespace-mode 1)))
+(add-hook 'diff-mode-hook
+          (lambda ()
+            (setq-local whitespace-style
+                        '(face
+                          tabs
+                          tab-mark
+                          spaces
+                          space-mark
+                          trailing
+                          indentation::space
+                          indentation::tab
+                          newline
+                          newline-mark))
+            (whitespace-mode 1)))
 
 ;; Package: volatile-highlights
 ;; GROUP: Editing -> Volatile Highlights
@@ -56,10 +58,9 @@
 ;; GROUP: Editing -> Yasnippet
 ;; Package: yasnippet
 ;; Still unsure about this one.
-;; (use-package yasnippet
-;;   :defer t
-;;   :init
-;;   (add-hook 'prog-mode-hook 'yas-minor-mode))
+(use-package yasnippet
+  :init
+  (add-hook 'prog-mode-hook 'yas-minor-mode))
 
 ;; Package: clean-aindent-mode
 (use-package clean-aindent-mode
@@ -68,11 +69,10 @@
 
 ;; Package: dtrt-indent
 (use-package dtrt-indent
-  :custom
-  (dtrt-indent-verbosity0)
   :init
   ;; (dtrt-indent-mode 1)
-  (add-hook 'c-mode-hook 'dtrt-indent-mode))
+  (add-hook 'c-mode-hook 'dtrt-indent-mode)
+  (setq dtrt-indent-verbosity 0))
 
 ;; Package: ws-butler
 (use-package ws-butler
@@ -90,16 +90,16 @@
 ;; GROUP: Editing -> Matching -> Isearch -> Anzu
 (use-package anzu
   :init
-  (global-anzu-mode +1)
+  (global-anzu-mode 1)
   (global-set-key (kbd "M-%") 'anzu-query-replace)
   (global-set-key (kbd "C-M-%") 'anzu-query-replace-regexp))
 
-;; PACKAGE: iedit
+;; Package: iedit
 (use-package iedit
-  :bind (("C-;" . iedit-mode))
-  :custom
-  (iedit-toggle-key-default nil)
-  (iedit-case-sensitive 1))
+  :bind (("M-#" . iedit-mode))
+  :init
+  (setq iedit-toggle-key-default nil)
+  (setq iedit-case-sensitive 1))
 
 ;;; This is the section that is going to be setting up flycheck
 ;;; Code:
@@ -121,7 +121,8 @@
               (setq flycheck-checker 'c/c++-cppcheck))))
 
 (use-package hi-lock
-  :bind (("M-s h w" . hi-lock-write-interactive-patterns)
+  :bind (:map hi-lock-map
+         ("M-s h w" . hi-lock-write-interactive-patterns)
          ("M-s h u" . unhighlight-regexp)
          ("M-s h r" . highlight-regexp)
          ("M-s h p" . highlight-phrase)
@@ -129,6 +130,16 @@
          ("M-s h f" . hi-lock-find-patterns))
   :init
   (global-set-key (kbd "M-s h h") 'hi-lock-mode))
+
+;; Make custom minor mode for this eventually
+(require 'corral)
+(global-set-key (kbd "M-9") 'corral-parentheses-backward)
+(global-set-key (kbd "M-0") 'corral-parentheses-forward)
+(global-set-key (kbd "M-[") 'corral-brackets-backward)
+(global-set-key (kbd "M-]") 'corral-brackets-forward)
+(global-set-key (kbd "M-{") 'corral-braces-backward)
+(global-set-key (kbd "M-}") 'corral-braces-forward)
+(global-set-key (kbd "M-\"") 'corral-double-quotes-backward)
 
 
 ;; Customized functions
@@ -289,7 +300,7 @@ Position the cursor at it's beginning, according to the current mode."
   (indent-according-to-mode))
 
 (global-set-key (kbd "M-o") 'prelude-smart-open-line)
-;;(global-set-key (kbd "M-o") 'open-line)
+(global-set-key (kbd "M-o") 'open-line)
 
 (global-set-key (kbd "M-w") 'copy-region-as-kill)
 

@@ -34,21 +34,6 @@
 (setq column-number-mode t)
 (setq linum-format "%d|")
 
-(defvar linum-disabled-modes
-  '(term-mode help-mode exwm-mode))
-
-(defun linum-disable-function ()
-  "Function for the hook for after major mode change."
-  (defun recloop (val lst)
-    ;;(message "recloop %s %s" val (car lst))
-    (cond
-     ((equal '() lst) 1)
-     ((equal val (car lst)) 0)
-     (t (recloop val (cdr lst)))))
-  (linum-mode (recloop major-mode linum-disabled-modes)))
-
-(add-hook 'after-change-major-mode-hook 'linum-disable-function)
-
 ;; Compilation
 ;; (global-set-key (kbd "<f5>") (lambda ()
 ;;                                (interactive)
@@ -85,6 +70,14 @@
 ;; binding functions
 (global-set-key (kbd "C-x C-k") 'delete-other-windows)
 (global-set-key (kbd "C-x M-s") 'save-buffers-kill-emacs)
+
+;; enabled functions
+(put 'narrow-to-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+
+
+;; Auto Mode Alist
+(add-to-list 'auto-mode-alist '("\\.nvmk\\'" . makefile-mode))
 
 (message "setup-general loaded")
 (provide 'setup-general)
